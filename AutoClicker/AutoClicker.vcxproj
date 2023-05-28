@@ -151,8 +151,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\TitleBar.hpp" />
-    <ClInclude Include="Utilities\Setup.hpp" />
-    <ClInclude Include="Utilities\Style.hpp" />
+    <ClInclude Include="src\Utilities\Setup.hpp" />
+    <ClInclude Include="src\Utilities\Style.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,25 +4,25 @@
     <ClCompile Include="src\AutoClicker.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Components">
-      <UniqueIdentifier>{6266b10f-144d-46db-a70f-2ce2289abc70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pages">
-      <UniqueIdentifier>{37a971ff-c7ed-470d-aab2-d29d58321a35}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utilities">
-      <UniqueIdentifier>{9eeabc72-d06e-4424-8dff-9abc517b4421}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="src\Components\TitleBar.hpp">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\Setup.hpp">
+    <ClInclude Include="src\Utilities\Setup.hpp">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\Style.hpp">
+    <ClInclude Include="src\Utilities\Style.hpp">
       <Filter>Utilities</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Components">
+      <UniqueIdentifier>{28f8edce-596b-42d5-89b7-39972c51a5a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{e0b4d21d-fd46-4957-a613-38b5facdebb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pages">
+      <UniqueIdentifier>{d75fff50-f01e-48ad-b04f-d43669a4820d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
