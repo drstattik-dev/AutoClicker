@@ -415,7 +415,13 @@ namespace Walnut {
 		}
 
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+
+		if (!m_Specification.ParentWindow)
+			glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+		
 		m_WindowHandle = glfwCreateWindow(m_Specification.Width, m_Specification.Height, m_Specification.Name.c_str(), NULL, NULL);
+
+
 
 		// Setup Vulkan
 		if (!glfwVulkanSupported())

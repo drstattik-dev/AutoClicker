@@ -1,13 +1,8 @@
-# Directories
-.vs/
-bin/
-bin-int/
+#exluded files
 
-# Files
-*.vcxproj
-*.vcxproj.user
-*.vcxproj.filters
-*.sln
-
-# Exclude
-!vendor/bin
+.vs
+/bin-int/
+/bin/
+imgui.ini
+*.filters
+*.user

@@ -1,38 +1,53 @@
 #include "Walnut/Application.h"
 #include "Walnut/EntryPoint.h"
 
-#include "Walnut/Image.h"
+#include "Components/TitleBar.hpp"
 
-class ExampleLayer : public Walnut::Layer
+#include "Utilities/Setup.hpp"
+
+Walnut::Application* appRef;
+
+class AutoClicker : public Walnut::Layer
 {
 public:
+	virtual void OnAttach() override
+	{
+		Utilities::Setup();
+	}
 	virtual void OnUIRender() override
 	{
-		ImGui::Begin("Hello");
-		ImGui::Button("Button");
-		ImGui::End();
+		
+		//create a window
+		ImGui::Begin("AutoClicker", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_MenuBar);
+		{
 
-		ImGui::ShowDemoWindow();
+			Components::RenderTitleBar();
+			
+
+			//create a button
+			if (ImGui::Button("Click"))
+			{
+				//click
+			}
+		}
+
+		ImGui::End();
 	}
 };
 
 Walnut::Application* Walnut::CreateApplication(int argc, char** argv)
 {
 	Walnut::ApplicationSpecification spec;
-	spec.Name = "Walnut Example";
+	spec.Name = "AutoClicker";
+	spec.ParentWindow = false;
 
 	Walnut::Application* app = new Walnut::Application(spec);
-	app->PushLayer<ExampleLayer>();
-	app->SetMenubarCallback([app]()
-	{
-		if (ImGui::BeginMenu("File"))
-		{
-			if (ImGui::MenuItem("Exit"))
-			{
-				app->Close();
-			}
-			ImGui::EndMenu();
-		}
-	});
+
+	//GLFWwindow GLFWwin = app->GetWindowHandle();
+
+	appRef = app;
+
+	app->PushLayer<AutoClicker>();
+
 	return app;
 }
