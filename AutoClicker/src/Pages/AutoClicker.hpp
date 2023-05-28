@@ -11,11 +11,13 @@
 
 #include "imgui.h"
 
+//running
+static bool running = false;
+
 //text fields for number of clicks and delay
 static char clicks[128] = "100";
 static char interval[128] = "50";
 int timer = 5;
-//static char timerChar[128] = "5";
 
 //total clicks
 static int totalClicks = 0;
@@ -62,8 +64,6 @@ private:
 		//convert int to char array
 		//sprintf_s(timerChar, "%d", timer);
 
-		
-
 		//render timer before start input
 		//ImGui::InputText("Timer", timerChar, IM_ARRAYSIZE(timerChar));
 
@@ -75,27 +75,30 @@ private:
 		int clicksInt = atoi(clicks);
 		int intervalInt = atoi(interval);
 
-		//if start button is pressed
-		if (ImGui::Button("Start"))
+		//if start button is pressed or hotkey is pressed to start auto clicker
+		if (!running)
 		{
-			//wait for timer
-			Utilities::WaitForTimer(timer);
-			//start auto clicker
-			//create new thread for auto clicker
-			std::thread t1(Utilities::StartAutoClicker, clicksInt, intervalInt, std::ref(totalClicks));
-			t1.detach();
+			if (ImGui::Button("Start") | GetAsyncKeyState(settings["Hotkeys"]["Start"]))
+			{
+				running = true;
+
+				//wait for timer
+				//Utilities::WaitForTimer(timer);
+
+				//start auto clicker
+				std::thread t1(Utilities::StartAutoClicker, clicksInt, intervalInt, std::ref(totalClicks));
+				t1.detach();
+			}
 		}
 
-		//check if hotkey is pressed
-		if (GetAsyncKeyState(VK_HOME))
+		//check if hotkey is pressed to stop auto clicker
+		if (GetAsyncKeyState(settings["Hotkeys"]["Stop"]))
 		{
 			//stop auto clicker
+			running = false;
 			Utilities::StopAutoClicker();
 		}
 
-
-
-		//sameline
 		ImGui::SameLine();
 
 		//timer countdown

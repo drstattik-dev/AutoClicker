@@ -1,0 +1,11 @@
+{
+    "Hotkeys": {
+        "Start": 36,
+        "Stop": 35
+    },
+    "Variables": {
+        "Clicks": 100,
+        "Interval": 100,
+        "TotalClicks": 0
+    }
+}

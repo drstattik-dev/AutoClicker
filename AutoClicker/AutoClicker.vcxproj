@@ -153,6 +153,8 @@
     <ClInclude Include="src\Components\TitleBar.hpp" />
     <ClInclude Include="src\Pages\AutoClicker.hpp" />
     <ClInclude Include="src\Utilities\ClickerUtil.hpp" />
+    <ClInclude Include="src\Utilities\Hotkeys.hpp" />
+    <ClInclude Include="src\Utilities\json.hpp" />
     <ClInclude Include="src\Utilities\Setup.hpp" />
     <ClInclude Include="src\Utilities\Style.hpp" />
   </ItemGroup>

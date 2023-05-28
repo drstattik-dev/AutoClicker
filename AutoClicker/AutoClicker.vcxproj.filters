@@ -15,6 +15,8 @@
     </ClInclude>
     <ClInclude Include="src\Pages\AutoClicker.hpp" />
     <ClInclude Include="src\Utilities\ClickerUtil.hpp" />
+    <ClInclude Include="src\Utilities\Hotkeys.hpp" />
+    <ClInclude Include="src\Utilities\json.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

@@ -2,8 +2,12 @@
 #pragma once
 
 #include "imgui.h"
+#include "json.hpp"
 
 #include "Style.hpp"
+#include "Hotkeys.hpp"
+
+nlohmann::json settings;
 
 
 namespace Utilities
@@ -11,6 +15,7 @@ namespace Utilities
 	void Setup()
 	{
 		Utilities::SetupImGuiStyles();
-		//Setup::Style::Light();
+		
+		settings = Utilities::LoadSettings();
 	}
 }

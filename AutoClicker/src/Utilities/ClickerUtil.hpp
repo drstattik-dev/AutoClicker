@@ -42,13 +42,13 @@ namespace Utilities
 				break;
 			}
 
-			//wait for interval using thread
-			std::this_thread::sleep_for(std::chrono::milliseconds(interval));
-
 			//increment total clicks
 			totalClicks++;
 
 			Click();
+
+			//wait for interval using thread
+			std::this_thread::sleep_for(std::chrono::milliseconds(interval));
 			
 		}
 	}
