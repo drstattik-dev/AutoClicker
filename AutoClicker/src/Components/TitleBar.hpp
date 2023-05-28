@@ -8,6 +8,8 @@
 
 #include "imgui.h"
 
+Walnut::Application* appRef;
+
 namespace Components
 {
 	void RenderTitleBar()
@@ -19,7 +21,8 @@ namespace Components
 			{
 				if (ImGui::MenuItem("Exit"))
 				{
-					//ImGui::Get->Close();
+					
+					appRef->Close();
 				}
 				ImGui::EndMenu();
 			}
@@ -43,7 +46,7 @@ namespace Components
 
 				if (ImGui::BeginMenu("X", true))
 				{
-					//appRef->Close();
+					appRef->Close();
 					ImGui::EndMenu();
 				}
 			}

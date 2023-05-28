@@ -13,6 +13,8 @@
     <ClInclude Include="src\Utilities\Style.hpp">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="src\Pages\AutoClicker.hpp" />
+    <ClInclude Include="src\Utilities\ClickerUtil.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
