@@ -5,10 +5,15 @@
 A simple autoclicker software built in C++ using vulkan as a renderer and dear imgui for the UI. This program automates mouse clicks at specified intervals to assist with repetitive tasks or gaming.
 
 ## Features
+![image](https://github.com/drstattik-dev/AutoClicker/assets/54222325/6dc45cfd-2f29-4f50-9eec-511eac0d1176)
 
-- Specify the number of clicks and interval between each click.
+
+✓ Specify the number of clicks and interval between each click.
+
 - Option to choose between left, right, or middle mouse button clicks.
-- Ability to pause or stop the autoclicker.
+
+✓ Ability to pause or stop the autoclicker. (Home button)
+
 - Customizable hotkeys to start/pause or stop the autoclicker.
 
 ## Requirements
