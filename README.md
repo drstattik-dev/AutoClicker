@@ -1,6 +1,23 @@
-# Walnut App Template
+# AutoClicker Software
 
-This is a simple app template for [Walnut](https://github.com/TheCherno/Walnut) - unlike the example within the Walnut repository, this keeps Walnut as an external submodule and is much more sensible for actually building applications. See the [Walnut](https://github.com/TheCherno/Walnut) repository for more details.
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## Getting Started
-Once you've cloned, you can customize the `premake5.lua` and `WalnutApp/premake5.lua` files to your liking (eg. change the name from "WalnutApp" to something else).  Once you're happy, run `scripts/Setup.bat` to generate Visual Studio 2022 solution/project files. Your app is located in the `WalnutApp/` directory, which some basic example code to get you going in `WalnutApp/src/WalnutApp.cpp`. I recommend modifying that WalnutApp project to create your own application, as everything should be setup and ready to go.
+A simple autoclicker software built in [programming language]. This program automates mouse clicks at specified intervals to assist with repetitive tasks or gaming.
+
+## Features
+
+- Specify the number of clicks and interval between each click.
+- Option to choose between left, right, or middle mouse button clicks.
+- Ability to pause or stop the autoclicker.
+- Customizable hotkeys to start/pause or stop the autoclicker.
+
+## Requirements
+
+- [List any dependencies or prerequisites required to run the software.]
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/autoclicker.git
