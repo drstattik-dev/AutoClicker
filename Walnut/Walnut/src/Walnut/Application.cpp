@@ -418,6 +418,7 @@ namespace Walnut {
 
 		if (!m_Specification.ParentWindow)
 			glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+
 		
 		m_WindowHandle = glfwCreateWindow(m_Specification.Width, m_Specification.Height, m_Specification.Name.c_str(), NULL, NULL);
 
@@ -457,6 +458,8 @@ namespace Walnut {
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
 		//io.ConfigViewportsNoAutoMerge = true;
 		//io.ConfigViewportsNoTaskBarIcon = true;
+		if (!m_Specification.ParentWindow)
+			io.ConfigViewportsNoAutoMerge = true;
 
 		// Setup Dear ImGui style
 		ImGui::StyleColorsDark();

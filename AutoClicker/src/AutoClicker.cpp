@@ -18,7 +18,7 @@ public:
 	{
 		
 		//create a window
-		ImGui::Begin("AutoClicker", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_MenuBar);
+		ImGui::Begin("AutoClicker", nullptr, ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_MenuBar);
 		{
 
 			Components::RenderTitleBar();
