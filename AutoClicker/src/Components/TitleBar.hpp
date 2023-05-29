@@ -14,7 +14,7 @@ namespace Components
 {
 	void RenderTitleBar()
 	{
-		std::cout << "RenderUI" << std::endl;
+		//std::cout << "RenderUI" << std::endl;
 		if (ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("File", true))

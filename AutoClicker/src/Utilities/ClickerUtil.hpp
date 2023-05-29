@@ -3,7 +3,7 @@
 
 #include <Windows.h>
 #include <thread>
-
+#include <wingdi.h>
 
 
 
@@ -13,24 +13,35 @@ namespace Utilities
 	bool cancelAutoClicker = false;
 
 	//click function
-	void Click(int x = 0, int y = 0)
+	int Click(int x = 0, int y = 0)
 	{
 		//send input mouse click
 		INPUT input;
 		input.type = INPUT_MOUSE;
 
+		//SetCursorPos(x, y);
+
 		input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+		//input.mi.dx = x;
+		//input.mi.dy = y;
 		SendInput(1, &input, sizeof(INPUT));
 
 		input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+		//input.mi.dx = x;
+		//input.mi.dy = y;
 		SendInput(1, &input, sizeof(INPUT));
+
+		return 0;
 	}
 
 
 	//start auto clicker
-	void StartAutoClicker(int clicks, int interval, int &totalClicks)
+	void StartAutoClicker(int clicks, int interval, int &totalClicks, POINT Target)
 	{
 		cancelAutoClicker = false;
+
+		POINT originalMousePos;
+		GetCursorPos(&originalMousePos);
 
 		//start clicking mouse
 		for (int i = 0; i < clicks; i++)
@@ -45,12 +56,16 @@ namespace Utilities
 			//increment total clicks
 			totalClicks++;
 
-			Click();
-
-			//wait for interval using thread
+			//wait for interval
 			std::this_thread::sleep_for(std::chrono::milliseconds(interval));
+
+			//click mouse
+			Click(Target.x, Target.y);
+
 			
 		}
+		//reset mouse position
+		SetCursorPos(originalMousePos.x, originalMousePos.y);
 	}
 
 	//stop auto clicker

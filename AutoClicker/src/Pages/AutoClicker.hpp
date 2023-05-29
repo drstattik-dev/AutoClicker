@@ -11,6 +11,10 @@
 
 #include "imgui.h"
 
+#include "Walnut/Image.h"
+#include "vulkan/vulkan.h"
+
+
 //running
 static bool running = false;
 
@@ -18,6 +22,9 @@ static bool running = false;
 static char clicks[128] = "100";
 static char interval[128] = "50";
 int timer = 5;
+
+static POINT clickTarget = { 0, 0 };
+bool lookingForTarget = false;
 
 //total clicks
 static int totalClicks = 0;
@@ -75,6 +82,36 @@ private:
 		int clicksInt = atoi(clicks);
 		int intervalInt = atoi(interval);
 
+		//set target position
+		if (ImGui::Button("Set Target Position"))
+			lookingForTarget = true;
+		if (lookingForTarget)
+		{
+
+			POINT mousePos;
+			GetCursorPos(&mousePos);
+			std::string mousePosString = "MouseX: " + std::to_string(mousePos.x) + ", MouseY: " + std::to_string(mousePos.y);
+
+			//show text next to mouse
+			ImGui::SetNextWindowPos(ImVec2(mousePos.x + 10, mousePos.y + 10));
+
+			//set box size to text size
+			ImVec2 textSize = ImVec2(ImGui::CalcTextSize(mousePosString.c_str()));
+
+			textSize.x += 10;
+			ImGui::SetNextWindowSize(textSize);
+
+			ImGui::Begin("Target Position", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar);
+			ImGui::Text("MouseX: %d, MouseY: %d", mousePos.x, mousePos.y);
+			ImGui::End();
+
+			if (GetAsyncKeyState(VK_LBUTTON))
+			{
+				clickTarget = mousePos;
+				lookingForTarget = false;
+			}
+		}
+
 		//if start button is pressed or hotkey is pressed to start auto clicker
 		if (!running)
 		{
@@ -86,7 +123,7 @@ private:
 				//Utilities::WaitForTimer(timer);
 
 				//start auto clicker
-				std::thread t1(Utilities::StartAutoClicker, clicksInt, intervalInt, std::ref(totalClicks));
+				std::thread t1(Utilities::StartAutoClicker, clicksInt, intervalInt, std::ref(totalClicks), clickTarget);
 				t1.detach();
 			}
 		}
