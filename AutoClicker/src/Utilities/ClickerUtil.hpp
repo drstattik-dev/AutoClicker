@@ -9,8 +9,19 @@
 
 namespace Utilities
 {
+	//array of points
+	POINT points[1000];
+	int pointIndex = 0;
+
 	//cancel auto clicker
 	bool cancelAutoClicker = false;
+
+	void addPoint(int x, int y)
+	{
+		points[pointIndex].x = x;
+		points[pointIndex].y = y;
+		pointIndex++;
+	}
 
 	//click function
 	int Click(int x = 0, int y = 0)
@@ -19,16 +30,12 @@ namespace Utilities
 		INPUT input;
 		input.type = INPUT_MOUSE;
 
-		//SetCursorPos(x, y);
+		SetCursorPos(x, y);
 
 		input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
-		//input.mi.dx = x;
-		//input.mi.dy = y;
 		SendInput(1, &input, sizeof(INPUT));
 
 		input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
-		//input.mi.dx = x;
-		//input.mi.dy = y;
 		SendInput(1, &input, sizeof(INPUT));
 
 		return 0;
@@ -36,36 +43,30 @@ namespace Utilities
 
 
 	//start auto clicker
-	void StartAutoClicker(int clicks, int interval, int &totalClicks, POINT Target)
+	void StartAutoClicker(int clicks, int interval, int &totalClicks, POINT Target, bool &running)
 	{
 		cancelAutoClicker = false;
 
 		POINT originalMousePos;
-		GetCursorPos(&originalMousePos);
 
-		//start clicking mouse
 		for (int i = 0; i < clicks; i++)
 		{
-			//if cancel auto clicker is true
 			if (cancelAutoClicker)
-			{
-				//stop auto clicker
 				break;
-			}
 
-			//increment total clicks
-			totalClicks++;
+			if (interval > 0)
+				std::this_thread::sleep_for(std::chrono::milliseconds(interval));
 
-			//wait for interval
-			std::this_thread::sleep_for(std::chrono::milliseconds(interval));
+			GetCursorPos(&originalMousePos);
 
-			//click mouse
 			Click(Target.x, Target.y);
 
-			
+			totalClicks++;
+
+			SetCursorPos(originalMousePos.x, originalMousePos.y);
 		}
-		//reset mouse position
-		SetCursorPos(originalMousePos.x, originalMousePos.y);
+
+		running = false;
 	}
 
 	//stop auto clicker
@@ -74,13 +75,10 @@ namespace Utilities
 		cancelAutoClicker = true;
 	}
 
-	//timer
 	void WaitForTimer(int seconds)
 	{
-		//start timer
 		for (int i = 0; i < seconds; i++)
 		{
-			//wait for 1 second
 			std::this_thread::sleep_for(std::chrono::seconds(1));
 		}
 	}

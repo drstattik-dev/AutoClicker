@@ -13,6 +13,7 @@
 
 #include "Walnut/Image.h"
 #include "vulkan/vulkan.h"
+#include <imgui_internal.h>
 
 
 //running
@@ -24,7 +25,7 @@ static char interval[128] = "50";
 int timer = 5;
 
 static POINT clickTarget = { 0, 0 };
-bool lookingForTarget = false;
+bool lookingForTargets = false;
 
 //total clicks
 static int totalClicks = 0;
@@ -81,11 +82,12 @@ private:
 		//convert text fields to ints
 		int clicksInt = atoi(clicks);
 		int intervalInt = atoi(interval);
-
+		//if lookingForTarget true disable the button
 		//set target position
 		if (ImGui::Button("Set Target Position"))
-			lookingForTarget = true;
-		if (lookingForTarget)
+			lookingForTargets = !lookingForTargets;
+
+		if (lookingForTargets && !ImGui::IsAnyItemHovered())
 		{
 
 			POINT mousePos;
@@ -105,35 +107,31 @@ private:
 			ImGui::Text("MouseX: %d, MouseY: %d", mousePos.x, mousePos.y);
 			ImGui::End();
 
+			//check if hovering over the 
+
 			if (GetAsyncKeyState(VK_LBUTTON))
-			{
+			{	
+				Utilities::addPoint(mousePos.x, mousePos.y);
 				clickTarget = mousePos;
-				lookingForTarget = false;
 			}
 		}
 
 		//if start button is pressed or hotkey is pressed to start auto clicker
-		if (!running)
+		if (ImGui::Button(!running ? "Start" : "Stop") || GetAsyncKeyState(settings["Hotkeys"][!running ? "Start" : "Stop"]))
 		{
-			if (ImGui::Button("Start") | GetAsyncKeyState(settings["Hotkeys"]["Start"]))
+			running = !running;
+
+			if (!running)
 			{
-				running = true;
+				Utilities::StopAutoClicker();
+				return;
+			}
+			else
+			{
 
-				//wait for timer
-				//Utilities::WaitForTimer(timer);
-
-				//start auto clicker
-				std::thread t1(Utilities::StartAutoClicker, clicksInt, intervalInt, std::ref(totalClicks), clickTarget);
+				std::thread t1(Utilities::StartAutoClicker, clicksInt, intervalInt, std::ref(totalClicks), clickTarget, std::ref(running));
 				t1.detach();
 			}
-		}
-
-		//check if hotkey is pressed to stop auto clicker
-		if (GetAsyncKeyState(settings["Hotkeys"]["Stop"]))
-		{
-			//stop auto clicker
-			running = false;
-			Utilities::StopAutoClicker();
 		}
 
 		ImGui::SameLine();
